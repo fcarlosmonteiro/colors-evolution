@@ -8,6 +8,7 @@ from colormath.color_conversions import convert_color
 from colormath.color_diff import delta_e_cie2000
 
 colors, pixel_count = extcolors.extract_from_path("logo.png")
+print(colors)
 
 def rgb2hex(color):
     return f"#{''.join(f'{hex(c)[2:].upper():0>2}' for c in color)}"
