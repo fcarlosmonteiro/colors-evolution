@@ -31,7 +31,6 @@ def rgb2hsv(colors):
 
 def find_base(colors):
     for color in colors:
-        print(color)
         if color[2]<0.2:
             #return "Black"
             return color
@@ -56,7 +55,7 @@ def compute_contrast_ratio(corBase, colors):
     for c in colors:
         initial_color=convert_scale(c[0])
         ratio=contrast.rgb(corBase, initial_color)
-        print("Cor 1:"+str(corBase)+" e Cor 2:"+str(initial_color)+" - contrast ratio = "+str(round(ratio,2)))
+        #print("Cor 1:"+str(corBase)+" e Cor 2:"+str(initial_color)+" - contrast ratio = "+str(round(ratio,2)))
         valueWCAG=contrast.passes_AA(ratio)
         if valueWCAG==False:
             return initial_color
@@ -72,9 +71,8 @@ def objective_function(solution):
 def main():
     path="logo.png"
     colors=get_colors(path)
-    print(colors)
     colors_hsv=rgb2hsv(colors)
-    colorBase=find_base(colors)
+    colorBase=find_base(colors_hsv)
     initial_color=compute_contrast_ratio(colorBase, colors)
     print(initial_color)
     
