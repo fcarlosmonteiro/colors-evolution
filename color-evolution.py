@@ -1,5 +1,9 @@
 import extcolors
 import colorsys
+from colormath.color_objects import HSVColor, sRGBColor, LabColor
+from colormath.color_conversions import convert_color
+from colormath.color_diff import delta_e_cie2000
+from networkx.classes.function import neighbors
 import wcag_contrast_ratio as contrast
 
 #get an image and extract a set of colors
@@ -63,9 +67,22 @@ def compute_contrast_ratio(corBase, colors):
             pass
 
 def generate_neighborhood(current):
-    return "neighborhood"
+    neighborhood=[]
+    
+    neighbor1=current
+    neighbor1[0]=neighbor1[0]+1
+    
+    neighbor2=current
+    neighbor2[0]=neighbor1[0]+1
+    
+    neighbor3=current
+    neighbor3[0]=neighbor1[0]+1
+    
+    neighborhood.append(neighbor1,neighbor2,neighbor3)
+    
+    return neighborhood
 
-def objective_function(solution):
+def objective_function(current,neighborhood):
     return "fit_value"
 
 def main():
@@ -74,10 +91,10 @@ def main():
     colors_hsv=rgb2hsv(colors)
     colorBase=find_base(colors_hsv)
     initial_color=compute_contrast_ratio(colorBase, colors)
-    print(initial_color)
-    
-    #get first solution
-    
+    current=initial_color
+    neighborhood=generate_neighborhood(current)
+   
+       
     #solution becomes current
     #extends neighborhood
     #evaluate solutions

@@ -1,4 +1,4 @@
-from colormath.color_objects import sRGBColor, LabColor
+from colormath.color_objects import HSVColor, sRGBColor, LabColor
 from colormath.color_conversions import convert_color
 from colormath.color_diff import delta_e_cie2000
 import colorsys
@@ -8,6 +8,12 @@ from wcag_contrast_ratio.contrast import rgb
 color1_rgb = sRGBColor(0.0, 0.0, 0.0)
 # white Color
 color2_rgb = sRGBColor(1.0, 1.0, 1.0)
+
+#--------------HSV to LabColor----------------------#
+corHSV=HSVColor(240,100,100)
+teste= convert_color(corHSV,LabColor)
+print(teste)
+
 
 #--------------COMPUTE THE DIFF----------------------#
 # Convert from RGB to Lab Color Space
