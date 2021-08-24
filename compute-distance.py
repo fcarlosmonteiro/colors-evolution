@@ -30,7 +30,7 @@ def rgb2hsv(red,green,blue):
  
     #get hsv percentage: range (0-1, 0-1, 0-1)
     color_hsv_percentage=colorsys.rgb_to_hsv(red_percentage, green_percentage, blue_percentage) 
-    #print('color_hsv_percentage: ', color_hsv_percentage)
+    print('color_hsv_percentage: ', color_hsv_percentage)
    
     #get normal hsv: range (0-360, 0-255, 0-255)
     color_h=round(360*color_hsv_percentage[0])
@@ -38,7 +38,7 @@ def rgb2hsv(red,green,blue):
     color_v=round(255*color_hsv_percentage[2])
     color_hsv=(color_h, color_s, color_h)
     return(color_hsv_percentage)
-    #print('color_hsv: ', color_hsv)
+    print('color_hsv: ', color_hsv)
 
 
 #cores bases
