@@ -1,6 +1,7 @@
 import extcolors
 import colorsys
-from colormath.color_objects import HSVColor, sRGBColor, LabColor
+import random
+from colormath.color_objects import ColorBase, HSVColor, sRGBColor, LabColor
 from colormath.color_conversions import convert_color
 from colormath.color_diff import delta_e_cie2000
 from networkx.classes.function import neighbors
@@ -47,6 +48,13 @@ def find_base(colors):
         else: 
             return "not found"
 
+def convert_scale255(color):
+    result=[]
+    for x in color:
+        r=x*255.0
+        result.append(round(r,2))
+    return result
+
 def convert_scale(color):
     result=[]
     for x in color:
@@ -62,45 +70,50 @@ def compute_contrast_ratio(corBase, colors):
         #print("Cor 1:"+str(corBase)+" e Cor 2:"+str(initial_color)+" - contrast ratio = "+str(round(ratio,2)))
         valueWCAG=contrast.passes_AA(ratio)
         if valueWCAG==False:
-            return initial_color
+            return initial_color,ratio
         else:
             pass
 
 def generate_neighborhood(current):
     neighborhood=[]
+    neighbor1=current.copy()
+    neighbor1[0]=random.uniform(0,1)
+    #neighbor[0]=random.randint(0,255)
+    neighborhood.append(neighbor1)
     
-    neighbor1=current
-    neighbor1[0]=neighbor1[0]+1
-    
-    neighbor2=current
-    neighbor2[0]=neighbor1[0]+1
-    
-    neighbor3=current
-    neighbor3[0]=neighbor1[0]+1
-    
-    neighborhood.append(neighbor1,neighbor2,neighbor3)
+    #neighbor2=current.copy()
+    #neighbor2[1]=neighbor2[1]+(neighbor2[1]*0.5)
+    #neighborhood.append(neighbor2)
     
     return neighborhood
 
-def objective_function(current,neighborhood):
-    return "fit_value"
+def objective_function(current,colorBase,neighborhood):
+    for n in neighborhood:
+        ratio=contrast.rgb(colorBase, n)
+        valueWCAG=contrast.passes_AA(ratio)
+        print("Cor 1:"+str(colorBase)+" e Cor 2:"+str(n)+" - contrast ratio = "+str(round(ratio,2))+ " contrast test: ",valueWCAG)
+        obj_value=ratio
+        if current[1]<obj_value:
+            print("#############mudou################")
+            current=n,obj_value
+    return current
 
 def main():
     path="logo.png"
     colors=get_colors(path)
     colors_hsv=rgb2hsv(colors)
-    colorBase=find_base(colors_hsv)
-    initial_color=compute_contrast_ratio(colorBase, colors)
-    current=initial_color
-    neighborhood=generate_neighborhood(current)
-   
+    #colorBase=find_base(colors_hsv)
+    colorBase=(1,1,1)
+    #initial solution have the color and ratio
+    initial_sol=compute_contrast_ratio(colorBase, colors)
+    current=initial_sol
+
+    for i in range(1,5):
+        #print("------------->",current)
+        neighborhood=generate_neighborhood(current[0])
+        neighborhood=[[0,0,0]]
+        current=objective_function(current,colorBase,neighborhood)
        
-    #solution becomes current
-    #extends neighborhood
-    #evaluate solutions
-    #select best solution
-    #best solution becomes current
-    #back to line 20
     print()
 
 if __name__ == "__main__":
