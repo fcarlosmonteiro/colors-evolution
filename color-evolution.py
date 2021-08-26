@@ -76,42 +76,41 @@ def compute_contrast_ratio(corBase, colors):
 
 def generate_neighborhood(current):
     neighborhood=[]
+    currentRGB=convert_scale255(current)
     neighbor1=current.copy()
-    neighbor1[0]=random.uniform(0,1)
-    #neighbor[0]=random.randint(0,255)
+    #neighbor1[0]=random.uniform(0,1)
+    neighbor1[0]=random.randint(0,255)
+    #color = lambda : [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)]
     neighborhood.append(neighbor1)
-    
-    #neighbor2=current.copy()
-    #neighbor2[1]=neighbor2[1]+(neighbor2[1]*0.5)
-    #neighborhood.append(neighbor2)
     
     return neighborhood
 
 def objective_function(current,colorBase,neighborhood):
     for n in neighborhood:
+        n=convert_scale(n)
         ratio=contrast.rgb(colorBase, n)
         valueWCAG=contrast.passes_AA(ratio)
         print("Cor 1:"+str(colorBase)+" e Cor 2:"+str(n)+" - contrast ratio = "+str(round(ratio,2))+ " contrast test: ",valueWCAG)
         obj_value=ratio
         if current[1]<obj_value:
-            print("#############mudou################")
+            n=convert_scale255(n)
             current=n,obj_value
     return current
 
 def main():
-    path="logo.png"
+    path="logo2.png"
     colors=get_colors(path)
     colors_hsv=rgb2hsv(colors)
-    #colorBase=find_base(colors_hsv)
-    colorBase=(1,1,1)
+    colorBase=find_base(colors_hsv)
+    #colorBase=(0.5,0.5,0.5)
     #initial solution have the color and ratio
     initial_sol=compute_contrast_ratio(colorBase, colors)
     current=initial_sol
 
-    for i in range(1,5):
+    for i in range(1,50):
         #print("------------->",current)
         neighborhood=generate_neighborhood(current[0])
-        neighborhood=[[0,0,0]]
+        #neighborhood=[[0,0,0]]
         current=objective_function(current,colorBase,neighborhood)
        
     print()
