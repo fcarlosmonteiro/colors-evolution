@@ -14,8 +14,8 @@ suggested_colors=[]
 #get an image and extract a set of colors
 def get_colors(path):
     colors, pixel_count = extcolors.extract_from_path(path)
-    palette="extcolors "+ path +" --image 5"
-    os.system(palette)
+    #palette="extcolors "+ path +" --image 5"
+    #os.system(palette)
     return colors
 
 def rgb2hsv(colors):
@@ -158,13 +158,15 @@ def main():
 if __name__ == "__main__":
     #global best_result
     best_result=[]
+    best_recommended_colors=[]
     for interation in range(1,4):
         print("------------------------------Repetition: "+str(interation)+"------------------------------")
         main()
         if len(result)>len(best_result):
             best_result=result
+            best_recommended_colors=suggested_colors
         else:
             pass
     print()
-    print("The best found solution: ",best_result)
+    print("The best found solution: ",best_result,best_recommended_colors)
         
