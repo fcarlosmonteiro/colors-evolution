@@ -14,8 +14,8 @@ suggested_colors=[]
 #get an image and extract a set of colors
 def get_colors(path):
     colors, pixel_count = extcolors.extract_from_path(path)
-    #palette="extcolors "+ path +" --image img-palette"
-    #os.system(palette)
+    palette="extcolors "+ path +" --image 5"
+    os.system(palette)
     return colors
 
 def rgb2hsv(colors):
@@ -142,7 +142,7 @@ def find_nearest_neighbor(a,b):
 
 
 def main():
-    path="./image-dataset/1.jpeg"
+    path="./image-dataset/5.jpeg"
     result.clear()
     suggested_colors.clear()
     colors=get_colors(path)
