@@ -1,0 +1,112 @@
+------------------------------Repetition: 1------------------------------
+Number of colors:  3
+=============Color 1 passed the AA test=============
+Hill Climbing is starting for color 2...
+=============HC suggested a new color: [196.35, 252.45, 25.5] and it passed the AA test=============
+Hill Climbing is starting for color 3...
+=============HC suggested a new color: [91.8, 221.85, 109.65] and it passed the AA test=============
+Hill Climbing is starting for color 4...
+=============HC suggested a new color: [196.35, 204.0, 53.55] and it passed the AA test=============
+Cores que passaram no teste: [[0.97, 0.94, 0.85], [0.77, 0.99, 0.1], [0.36, 0.87, 0.43], [0.77, 0.8, 0.21]]
+Cores recomendadas:[[0.77, 0.99, 0.1], [0.36, 0.87, 0.43], [0.77, 0.8, 0.21]]
+------------------------------Repetition: 2------------------------------
+Number of colors:  3
+=============Color 1 passed the AA test=============
+Hill Climbing is starting for color 2...
+=============HC suggested a new color: [239.7, 216.75, 25.5] and it passed the AA test=============
+Hill Climbing is starting for color 3...
+=============HC suggested a new color: [209.1, 204.0, 109.65] and it passed the AA test=============
+Hill Climbing is starting for color 4...
+=============HC suggested a new color: [40.8, 252.45, 53.55] and it passed the AA test=============
+Cores que passaram no teste: [[0.97, 0.94, 0.85], [0.94, 0.85, 0.1], [0.82, 0.8, 0.43], [0.16, 0.99, 0.21]]
+Cores recomendadas:[[0.94, 0.85, 0.1], [0.82, 0.8, 0.43], [0.16, 0.99, 0.21]]
+------------------------------Repetition: 3------------------------------
+Number of colors:  3
+=============Color 1 passed the AA test=============
+Hill Climbing is starting for color 2...
+=============HC suggested a new color: [89.25, 242.25, 25.5] and it passed the AA test=============
+Hill Climbing is starting for color 3...
+=============HC suggested a new color: [226.95, 232.05, 109.65] and it passed the AA test=============
+Hill Climbing is starting for color 4...
+=============HC suggested a new color: [188.7, 221.85, 53.55] and it passed the AA test=============
+Cores que passaram no teste: [[0.97, 0.94, 0.85], [0.35, 0.95, 0.1], [0.89, 0.91, 0.43], [0.74, 0.87, 0.21]]
+Cores recomendadas:[[0.35, 0.95, 0.1], [0.89, 0.91, 0.43], [0.74, 0.87, 0.21]]
+------------------------------Repetition: 4------------------------------
+Number of colors:  3
+=============Color 1 passed the AA test=============
+Hill Climbing is starting for color 2...
+=============HC suggested a new color: [244.8, 186.15, 25.5] and it passed the AA test=============
+Hill Climbing is starting for color 3...
+=============HC suggested a new color: [191.25, 224.4, 109.65] and it passed the AA test=============
+Hill Climbing is starting for color 4...
+=============HC suggested a new color: [71.4, 239.7, 53.55] and it passed the AA test=============
+Cores que passaram no teste: [[0.97, 0.94, 0.85], [0.96, 0.73, 0.1], [0.75, 0.88, 0.43], [0.28, 0.94, 0.21]]
+Cores recomendadas:[[0.96, 0.73, 0.1], [0.75, 0.88, 0.43], [0.28, 0.94, 0.21]]
+------------------------------Repetition: 5------------------------------
+Number of colors:  3
+=============Color 1 passed the AA test=============
+Hill Climbing is starting for color 2...
+=============HC suggested a new color: [109.65, 255.0, 25.5] and it passed the AA test=============
+Hill Climbing is starting for color 3...
+=============HC suggested a new color: [175.95, 237.15, 109.65] and it passed the AA test=============
+Hill Climbing is starting for color 4...
+=============HC suggested a new color: [211.65, 249.9, 53.55] and it passed the AA test=============
+Cores que passaram no teste: [[0.97, 0.94, 0.85], [0.43, 1.0, 0.1], [0.69, 0.93, 0.43], [0.83, 0.98, 0.21]]
+Cores recomendadas:[[0.43, 1.0, 0.1], [0.69, 0.93, 0.43], [0.83, 0.98, 0.21]]
+------------------------------Repetition: 6------------------------------
+Number of colors:  3
+=============Color 1 passed the AA test=============
+Hill Climbing is starting for color 2...
+=============HC suggested a new color: [175.95, 247.35, 25.5] and it passed the AA test=============
+Hill Climbing is starting for color 3...
+=============HC suggested a new color: [17.85, 244.8, 109.65] and it passed the AA test=============
+Hill Climbing is starting for color 4...
+=============HC suggested a new color: [214.2, 239.7, 53.55] and it passed the AA test=============
+Cores que passaram no teste: [[0.97, 0.94, 0.85], [0.69, 0.97, 0.1], [0.07, 0.96, 0.43], [0.84, 0.94, 0.21]]
+Cores recomendadas:[[0.69, 0.97, 0.1], [0.07, 0.96, 0.43], [0.84, 0.94, 0.21]]
+------------------------------Repetition: 7------------------------------
+Number of colors:  3
+=============Color 1 passed the AA test=============
+Hill Climbing is starting for color 2...
+=============HC suggested a new color: [89.25, 221.85, 25.5] and it passed the AA test=============
+Hill Climbing is starting for color 3...
+=============HC suggested a new color: [242.25, 186.15, 109.65] and it passed the AA test=============
+Hill Climbing is starting for color 4...
+=============HC suggested a new color: [132.6, 234.6, 53.55] and it passed the AA test=============
+Cores que passaram no teste: [[0.97, 0.94, 0.85], [0.35, 0.87, 0.1], [0.95, 0.73, 0.43], [0.52, 0.92, 0.21]]
+Cores recomendadas:[[0.35, 0.87, 0.1], [0.95, 0.73, 0.43], [0.52, 0.92, 0.21]]
+------------------------------Repetition: 8------------------------------
+Number of colors:  3
+=============Color 1 passed the AA test=============
+Hill Climbing is starting for color 2...
+=============HC suggested a new color: [153.0, 244.8, 25.5] and it passed the AA test=============
+Hill Climbing is starting for color 3...
+=============HC suggested a new color: [183.6, 229.5, 109.65] and it passed the AA test=============
+Hill Climbing is starting for color 4...
+=============HC suggested a new color: [5.1, 252.45, 53.55] and it passed the AA test=============
+Cores que passaram no teste: [[0.97, 0.94, 0.85], [0.6, 0.96, 0.1], [0.72, 0.9, 0.43], [0.02, 0.99, 0.21]]
+Cores recomendadas:[[0.6, 0.96, 0.1], [0.72, 0.9, 0.43], [0.02, 0.99, 0.21]]
+------------------------------Repetition: 9------------------------------
+Number of colors:  3
+=============Color 1 passed the AA test=============
+Hill Climbing is starting for color 2...
+=============HC suggested a new color: [160.65, 242.25, 25.5] and it passed the AA test=============
+Hill Climbing is starting for color 3...
+=============HC suggested a new color: [229.5, 242.25, 109.65] and it passed the AA test=============
+Hill Climbing is starting for color 4...
+=============HC suggested a new color: [109.65, 232.05, 53.55] and it passed the AA test=============
+Cores que passaram no teste: [[0.97, 0.94, 0.85], [0.63, 0.95, 0.1], [0.9, 0.95, 0.43], [0.43, 0.91, 0.21]]
+Cores recomendadas:[[0.63, 0.95, 0.1], [0.9, 0.95, 0.43], [0.43, 0.91, 0.21]]
+------------------------------Repetition: 10------------------------------
+Number of colors:  3
+=============Color 1 passed the AA test=============
+Hill Climbing is starting for color 2...
+=============HC suggested a new color: [150.45, 214.2, 25.5] and it passed the AA test=============
+Hill Climbing is starting for color 3...
+=============HC suggested a new color: [255.0, 193.8, 109.65] and it passed the AA test=============
+Hill Climbing is starting for color 4...
+=============HC suggested a new color: [61.2, 244.8, 53.55] and it passed the AA test=============
+Cores que passaram no teste: [[0.97, 0.94, 0.85], [0.59, 0.84, 0.1], [1.0, 0.76, 0.43], [0.24, 0.96, 0.21]]
+Cores recomendadas:[[0.59, 0.84, 0.1], [1.0, 0.76, 0.43], [0.24, 0.96, 0.21]]
+
+The best found solution:  [[0.97, 0.94, 0.85], [0.59, 0.84, 0.1], [1.0, 0.76, 0.43], [0.24, 0.96, 0.21]] and recommended colors [[0.59, 0.84, 0.1], [1.0, 0.76, 0.43], [0.24, 0.96, 0.21]]

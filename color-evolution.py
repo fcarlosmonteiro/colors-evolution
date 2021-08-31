@@ -16,6 +16,7 @@ def get_colors(path):
     colors, pixel_count = extcolors.extract_from_path(path)
     #palette="extcolors "+ path +" --image 5"
     #os.system(palette)
+    print("Number of colors: ",len(colors)-1)
     return colors
 
 def rgb2hsv(colors):
@@ -90,7 +91,7 @@ def compute_contrast_ratio(corBase, colors):
             result.append(initial_color)
 
 def hill_climbing(initial_color,ratio,corBase,findcolor):
-    for i in range(1,6):
+    for i in range(1,101):
         #print("...")
         neighborhood=generate_neighborhood(initial_color)
         initial_color, findcolor=objective_function(initial_color,ratio,corBase,neighborhood)
@@ -98,7 +99,7 @@ def hill_climbing(initial_color,ratio,corBase,findcolor):
             pass
         else:
             break
-    print("new color not found")
+    #print("new color not found")
 
 def generate_neighborhood(current):
     neighborhood=[]
@@ -106,8 +107,16 @@ def generate_neighborhood(current):
     
     neighbor1=currentRGB.copy()
     neighbor1[0]=random.randint(0,255)
-    
+    neighbor1[1]=random.randint(0,255)
     neighborhood.append(neighbor1)
+    
+    neighbor2=currentRGB.copy()    
+    neighbor2[1]=random.randint(0,255)
+    neighborhood.append(neighbor2)
+    
+    neighbor3=currentRGB.copy()    
+    neighbor3[2]=random.randint(0,255)
+    neighborhood.append(neighbor3)
     
     return neighborhood
 
@@ -123,7 +132,7 @@ def objective_function(initial_color,ratio,corBase,neighborhood):
             initial_color=n,obj_value
             result.append(n)
             findcolor=True
-            print("=============HC suggested a new color: "+str(convert_scale255(n))+ "and it passed the AA test=============")
+            print("=============HC suggested a new color: "+str(convert_scale255(n))+ " and it passed the AA test=============")
             suggested_colors.append(n)
             return initial_color,findcolor
         else:
@@ -142,7 +151,7 @@ def find_nearest_neighbor(a,b):
 
 
 def main():
-    path="./image-dataset/5.jpeg"
+    path="./image-dataset/4.jpeg"
     result.clear()
     suggested_colors.clear()
     colors=get_colors(path)
@@ -159,7 +168,7 @@ if __name__ == "__main__":
     #global best_result
     best_result=[]
     best_recommended_colors=[]
-    for interation in range(1,4):
+    for interation in range(1,11):
         print("------------------------------Repetition: "+str(interation)+"------------------------------")
         main()
         if len(result)>len(best_result):
@@ -168,5 +177,5 @@ if __name__ == "__main__":
         else:
             pass
     print()
-    print("The best found solution: ",best_result,best_recommended_colors)
+    print("The best found solution: ",str(best_result)+" and recommended colors "+str(best_recommended_colors))
         
