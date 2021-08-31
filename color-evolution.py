@@ -1,5 +1,6 @@
 import extcolors
 import colorsys
+import os
 import random
 from colormath.color_objects import ColorBase, HSVColor, sRGBColor, LabColor
 from colormath.color_conversions import convert_color
@@ -10,6 +11,8 @@ import wcag_contrast_ratio as contrast
 #get an image and extract a set of colors
 def get_colors(path):
     colors, pixel_count = extcolors.extract_from_path(path)
+    #palette="extcolors "+ path +" --image gameboy-palette"
+    #os.system(palette)
     return colors
 
 def rgb2hsv(colors):
@@ -70,6 +73,8 @@ def compute_contrast_ratio(corBase, colors):
         #print("Cor 1:"+str(corBase)+" e Cor 2:"+str(initial_color)+" - contrast ratio = "+str(round(ratio,2)))
         valueWCAG=contrast.passes_AA(ratio)
         if valueWCAG==False:
+            #print("Cor 1:"+str(corBase)+" e Cor 2:"+str(c)+" - contrast ratio = "+str(round(ratio,2))+ " contrast test: ",valueWCAG)
+            print("Hill Climbing algorithm is starting...")
             return initial_color,ratio
         else:
             pass
@@ -77,12 +82,12 @@ def compute_contrast_ratio(corBase, colors):
 def generate_neighborhood(current):
     neighborhood=[]
     currentRGB=convert_scale255(current)
-    neighbor1=current.copy()
+    neighbor1=currentRGB.copy()
     #neighbor1[0]=random.uniform(0,1)
     neighbor1[0]=random.randint(0,255)
     #color = lambda : [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)]
     neighborhood.append(neighbor1)
-    
+    #print(neighborhood)
     return neighborhood
 
 def objective_function(current,colorBase,neighborhood):
@@ -90,19 +95,21 @@ def objective_function(current,colorBase,neighborhood):
         n=convert_scale(n)
         ratio=contrast.rgb(colorBase, n)
         valueWCAG=contrast.passes_AA(ratio)
-        print("Cor 1:"+str(colorBase)+" e Cor 2:"+str(n)+" - contrast ratio = "+str(round(ratio,2))+ " contrast test: ",valueWCAG)
+        print("Base color:"+str(colorBase)+" and neighbor:"+str(n)+" - contrast ratio = "+str(round(ratio,2))+ " contrast test: ",valueWCAG)
         obj_value=ratio
         if current[1]<obj_value:
-            n=convert_scale255(n)
+            #n=convert_scale255(n)
             current=n,obj_value
     return current
 
 def main():
     path="logo2.png"
     colors=get_colors(path)
+    #print("colors",colors)
     colors_hsv=rgb2hsv(colors)
     colorBase=find_base(colors_hsv)
-    #colorBase=(0.5,0.5,0.5)
+    #print(colorBase)
+    
     #initial solution have the color and ratio
     initial_sol=compute_contrast_ratio(colorBase, colors)
     current=initial_sol
