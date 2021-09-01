@@ -1,6 +1,5 @@
 import extcolors
 import colorsys
-import os
 import random
 from colormath.color_conversions import convert_color
 from colormath.color_diff import delta_e_cie2000
