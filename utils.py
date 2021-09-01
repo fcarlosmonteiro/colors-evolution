@@ -30,6 +30,13 @@ def find_base(colors):
         else: 
             return "not found"
 
+def find_main_color(colors):
+    frequency=[]
+    #print("main--",colors[0][0])
+    for color in colors:
+        frequency.append(color[1])
+    return color
+
 '''
 get a RGB colors and convert to RGB
 '''
