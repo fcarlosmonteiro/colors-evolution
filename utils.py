@@ -30,12 +30,12 @@ def find_base(colors):
         else: 
             return "not found"
 
-def find_main_color(colors):
-    frequency=[]
-    #print("main--",colors[0][0])
-    for color in colors:
-        frequency.append(color[1])
-    return color
+def get_main_color(colors):
+    colorsList = list(colors)
+    main_color=colors[0][0]
+    colorsList.pop(0)
+    colors = tuple(colorsList)
+    return main_color,colors
 
 '''
 get a RGB colors and convert to RGB
@@ -93,3 +93,5 @@ def image_result(colors, size, filename):
                          fill=color)
 
     result.save(filename, "PNG")
+    
+#https://www.geeksforgeeks.org/changing-the-contrast-and-brightness-of-an-image-using-python-opencv/
