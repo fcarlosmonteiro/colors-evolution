@@ -1,6 +1,8 @@
 import extcolors
+import math
 import colorsys
 import random
+from PIL import Image, ImageDraw
 from colormath.color_conversions import convert_color
 from colormath.color_diff import delta_e_cie2000
 from networkx.classes.function import neighbors
@@ -17,6 +19,21 @@ def get_colors(path):
     #os.system(palette)
     print("Number of colors: ",len(colors)-1)
     return colors
+
+def image_result(colors, size, filename):
+    columns = 5
+    width = int(min(len(colors), columns) * size)
+    height = int((math.floor(len(colors) / columns) + 1) * size)
+
+    result = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    canvas = ImageDraw.Draw(result)
+    for idx, color in enumerate(colors):
+        x = int((idx % columns) * size)
+        y = int(math.floor(idx / columns) * size)
+        canvas.rectangle([(x, y), (x + size - 1, y + size - 1)],
+                         fill=color)
+
+    result.save(filename, "PNG")
 
 def rgb2hsv(colors):
     #rgb normal: range (0-255, 0-255, 0.255)
@@ -56,12 +73,12 @@ def convert_scale255(color):
     result=[]
     try:
         for x in color:
-            r=x*255.0
-            result.append(round(r,2))
+            r=x*255
+            result.append(int(r))
     except:
         for x in color[0]:
-            r=x*255.0
-            result.append(round(r,2))
+            r=x*255
+            result.append(int(r))
     return result
 
 def convert_scale(color):
@@ -86,7 +103,7 @@ def compute_contrast_ratio(corBase, colors):
             hill_climbing(initial_color,ratio,corBase,findcolor)
         else:
             print("=============Color "+str(idx+1)+" passed the AA test=============")
-            result.append(initial_color)
+            result.append(tuple(convert_scale255(initial_color)))
 
 def hill_climbing(initial_color,ratio,corBase,findcolor):
     for i in range(1,101):
@@ -125,10 +142,10 @@ def objective_function(initial_color,ratio,corBase,neighborhood):
         obj_value=ratioNeighbor
         if valueWCAG==True:
             initial_color=n,obj_value
-            result.append(n)
+            result.append(tuple(convert_scale255(n)))
             findcolor=True
             print("=============HC suggested a new color: "+str(convert_scale255(n))+ " and it passed the AA test=============")
-            suggested_colors.append(n)
+            suggested_colors.append(convert_scale255(n))
             return initial_color,findcolor
         else:
             findcolor=False
@@ -150,18 +167,18 @@ def main():
     result.clear()
     suggested_colors.clear()
     colors=get_colors(path)
+    print("Initial colors",colors)
     qnt_colors=len(colors)-1
     colors_hsv=rgb2hsv(colors)
     colorBase=find_base(colors_hsv)
     compute_contrast_ratio(colorBase, colors)
     print("Cores que passaram no teste: "+str(result))
-    print("Cores recomendadas:" +str(suggested_colors))
-    
+    print("Cores recomendadas:" +str(suggested_colors))        
 
 if __name__ == "__main__":
     best_result=[]
     best_recommended_colors=[]
-    for interation in range(1,11):
+    for interation in range(1,2):
         print("------------------------------Repetition: "+str(interation)+"------------------------------")
         main()
         if len(result)>len(best_result):
@@ -170,5 +187,9 @@ if __name__ == "__main__":
         else:
             pass
     print()
-    print("The best found solution: ",str(best_result)+" and recommended colors "+str(best_recommended_colors))
-        
+    print("The best found solution: ",str(best_result))
+    
+    #print palett result
+    a=tuple(best_result)
+    image_result(a,200,"result")
+    #color,size,filename
