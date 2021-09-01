@@ -84,21 +84,18 @@ def compute_contrast_ratio(corBase, colors):
             #print("Cor 1:"+str(corBase)+" e Cor 2:"+str(initial_color)+" - contrast ratio = "+str(round(ratio,2))+ " contrast test: ",valueWCAG)
             print("Hill Climbing is starting for color "+str(idx+1)+"...")
             hill_climbing(initial_color,ratio,corBase,findcolor)
-            #return initial_color,ratio
         else:
             print("=============Color "+str(idx+1)+" passed the AA test=============")
             result.append(initial_color)
 
 def hill_climbing(initial_color,ratio,corBase,findcolor):
     for i in range(1,101):
-        #print("...")
         neighborhood=generate_neighborhood(initial_color)
         initial_color, findcolor=objective_function(initial_color,ratio,corBase,neighborhood)
         if findcolor==False:
             pass
         else:
             break
-    #print("new color not found")
 
 def generate_neighborhood(current):
     neighborhood=[]
@@ -127,7 +124,6 @@ def objective_function(initial_color,ratio,corBase,neighborhood):
         #print("**Base color:"+str(corBase)+" and neighbor:"+str(n)+" - contrast ratio = "+str(round(ratioNeighbor,2))+ " contrast test: ",valueWCAG)
         obj_value=ratioNeighbor
         if valueWCAG==True:
-            #n=convert_scale255(n)
             initial_color=n,obj_value
             result.append(n)
             findcolor=True
@@ -154,7 +150,6 @@ def main():
     result.clear()
     suggested_colors.clear()
     colors=get_colors(path)
-    #print("colors",colors)
     qnt_colors=len(colors)-1
     colors_hsv=rgb2hsv(colors)
     colorBase=find_base(colors_hsv)
@@ -164,7 +159,6 @@ def main():
     
 
 if __name__ == "__main__":
-    #global best_result
     best_result=[]
     best_recommended_colors=[]
     for interation in range(1,11):
