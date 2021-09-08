@@ -3,7 +3,9 @@ import random
 
 from networkx.drawing.layout import rescale_layout
 import utils
+import objective_function as of
 import wcag_contrast_ratio as contrast
+
 
 global result
 result=[]
@@ -32,7 +34,7 @@ def hill_climbing(current_color,main_color):
     neighborhood=generate_neighborhood(current_color)
     print("Current",current_color)
     print("Neighborhood",neighborhood)
-    current,valueWCG=objective_function(current_color,neighborhood,main_color)
+    current,valueWCG=of.objective_function(current_color,neighborhood,main_color)
     return valueWCG
 
 '''gera as cores vizinhas, porém está fugindo da matiz original
@@ -54,28 +56,6 @@ def generate_neighborhood(current):
     neighborhood.append(neighbor3)
     
     return neighborhood
-
-'''calcula o constrast ratio da vizinhança e retorna a cor que passar
-'''
-def objective_function(current_color,neighborhood, main_color):
-    #color=utils.convert_scale(color)
-    for n in neighborhood:
-        ratioNeighbor=contrast.rgb(utils.convert_scale(main_color), utils.convert_scale(n))
-        valueWCAG=contrast.passes_AA(ratioNeighbor)
-        if valueWCAG==True:
-            n=current_color
-            return n,valueWCAG
-        else:
-            #retornar vizinho que mais se aproxima de ser true
-            pass    
-
-
-def find_nearest_neighbor(a,b):
-    reference=4.5
-    a_list=[a,b]
-    absolute_difference_function = lambda list_value : abs(list_value - reference)
-    closest_value = min(a_list, key=absolute_difference_function)
-    return closest_value
 
 
 if __name__ == '__main__':
