@@ -8,7 +8,6 @@ def objective_function(current_color,neighborhood, main_color):
         ratioNeighbor=contrast.rgb(utils.convert_scale(main_color), utils.convert_scale(n))
         valueWCAG=contrast.passes_AA(ratioNeighbor)
         if valueWCAG==True:
-            n=current_color
             return n,valueWCAG
         else:
             #retornar vizinho que mais se aproxima de ser true

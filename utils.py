@@ -1,4 +1,6 @@
 from PIL import Image, ImageDraw
+import matplotlib.pyplot as plt
+import numpy as np
 import extcolors
 import colorsys
 import math
@@ -93,5 +95,18 @@ def image_result(colors, size, filename):
                          fill=color)
 
     result.save(filename, "PNG")
+
+def reshape_colors(colors):
+    initial_colors=[]
+    for c in colors:
+        initial_colors.append(c[0])
+    return initial_colors
+
+def plot_palette(name,colors):
+    palette = np.array(colors)[np.newaxis, :, :]
+    plt.imshow(palette)
+    plt.axis('off')
+    plt.savefig(name+'.png')
+    #plt.show()
     
 #https://www.geeksforgeeks.org/changing-the-contrast-and-brightness-of-an-image-using-python-opencv/

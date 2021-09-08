@@ -21,7 +21,7 @@ def test_constrat_ratio(main_color,colors):
         valueWCAG=contrast.passes_AA(ratio)
         while valueWCAG==False:
             print("Hill Climbing is starting for color "+str(idx+1)+"...")
-            valueWCAG=hill_climbing(current_color,main_color)
+            current_color,valueWCAG=hill_climbing(current_color,main_color)
         else:
             print("=============Color "+str(idx+1)+" passed the AA test=============")
             result.append(current_color)
@@ -35,7 +35,7 @@ def hill_climbing(current_color,main_color):
     print("Current",current_color)
     print("Neighborhood",neighborhood)
     current,valueWCG=of.objective_function(current_color,neighborhood,main_color)
-    return valueWCG
+    return current,valueWCG
 
 '''gera as cores vizinhas, porém está fugindo da matiz original
 '''    
@@ -60,8 +60,17 @@ def generate_neighborhood(current):
 
 if __name__ == '__main__':
     path="./image-dataset/1.jpeg"
+    
     colors=utils.get_colors(path)
     print("Initial Colors",colors)
+    initial_colors=utils.reshape_colors(colors)
+    name="initial"
+    utils.plot_palette(name,initial_colors)
+    
     main_color,colors=utils.get_main_color(colors)
+    print(main_color)
     test_constrat_ratio(main_color,colors)
-    print("Results: ",result)
+    
+    print("Results: ",result)    
+    namer="results"
+    utils.plot_palette(namer,result)
