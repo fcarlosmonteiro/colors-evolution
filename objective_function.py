@@ -6,9 +6,10 @@ import utils
 def objective_function(current_color,neighborhood, main_color):
     for n in neighborhood:
         ratioNeighbor=contrast.rgb(utils.convert_scale(main_color), utils.convert_scale(n))
+        #print("-->",n,ratioNeighbor)
         valueWCAG=contrast.passes_AA(ratioNeighbor)
         if valueWCAG==True:
-            return n,valueWCAG
+            return n,valueWCAG,ratioNeighbor
         else:
             #retornar vizinho que mais se aproxima de ser true
             pass    

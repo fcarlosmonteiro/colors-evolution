@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import extcolors
 import colorsys
+import xlwt
 import math
 
 '''
@@ -108,5 +109,28 @@ def plot_palette(name,colors):
     plt.axis('off')
     plt.savefig(name+'.png')
     #plt.show()
+
+def save_xls(results,ratio):
+    
+    workbook = xlwt.Workbook() 
+    
+    sheet = workbook.add_sheet("Sheet Name")
+    
+    # Applying multiple styles
+    style = xlwt.easyxf('font: bold 1, color black;')
+    
+    # Writing on specified sheet
+    sheet.write(0, 0, 'color', style)
+    sheet.write(1, 0, '1', style)
+    sheet.write(2, 0, '2', style)
+
+
+    sheet.write(0, 1, 'ratio', style)
+    sheet.write(1, 1, '0.4', style)
+    sheet.write(2, 1, '0.5', style)
+
+    
+    workbook.save("sample.xls")
+
     
 #https://www.geeksforgeeks.org/changing-the-contrast-and-brightness-of-an-image-using-python-opencv/

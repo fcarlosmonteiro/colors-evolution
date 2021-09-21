@@ -8,7 +8,9 @@ import wcag_contrast_ratio as contrast
 
 
 global result
+global hex_result
 result=[]
+hex_result=[]
 
 '''calcula o contraste, caso a cor não passe o HC é iniciado
 e executa enquanto nao encontrar uma cor.
@@ -21,9 +23,11 @@ def test_constrat_ratio(main_color,colors):
         valueWCAG=contrast.passes_AA(ratio)
         while valueWCAG==False:
             print("Hill Climbing is starting for color "+str(idx+1)+"...")
-            current_color,valueWCAG=hill_climbing(current_color,main_color)
+            current_color,valueWCAG,ratioNeighbor=hill_climbing(current_color,main_color)
         else:
+            ratio=ratioNeighbor
             print("=============Color "+str(idx+1)+" passed the AA test=============")
+            print(current_color, ratio)
             result.append(current_color)
     return current_color
 
@@ -34,8 +38,8 @@ def hill_climbing(current_color,main_color):
     neighborhood=generate_neighborhood(current_color)
     print("Current",current_color)
     print("Neighborhood",neighborhood)
-    current,valueWCG=of.objective_function(current_color,neighborhood,main_color)
-    return current,valueWCG
+    current,valueWCG,ratioNeighbor=of.objective_function(current_color,neighborhood,main_color)
+    return current,valueWCG,ratioNeighbor
 
 '''gera as cores vizinhas, porém está fugindo da matiz original
 '''    
@@ -59,7 +63,7 @@ def generate_neighborhood(current):
 
 
 if __name__ == '__main__':
-    path="./image-dataset/1.jpeg"
+    path="./image-dataset/4.jpeg"
     
     colors=utils.get_colors(path)
     print("Initial Colors",colors)
