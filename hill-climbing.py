@@ -8,8 +8,10 @@ import wcag_contrast_ratio as contrast
 
 
 global result
+global result_ratio
 global hex_result
 result=[]
+result_ratio=[]
 hex_result=[]
 
 '''calcula o contraste, caso a cor não passe o HC é iniciado
@@ -27,8 +29,9 @@ def test_constrat_ratio(main_color,colors):
         else:
             ratio=ratioNeighbor
             print("=============Color "+str(idx+1)+" passed the AA test=============")
-            print(current_color, ratio)
+            #print(current_color, ratio)
             result.append(current_color)
+            result_ratio.append(ratioNeighbor)
     return current_color
 
 '''processo algoritmo subida da encosta
@@ -74,6 +77,8 @@ if __name__ == '__main__':
     main_color,colors=utils.get_main_color(colors)
     print(main_color)
     test_constrat_ratio(main_color,colors)
+    
+    utils.save_xls(result,result_ratio)
     
     print("Results: ",result)    
     namer="results"
