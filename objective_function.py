@@ -10,10 +10,10 @@ def objective_function(current_color,neighborhood, main_color):
     for index,n in enumerate(neighborhood):
         ratioNeighbor=ratio.ratio_test(main_color,n)
         ratioNeighborList.append(ratioNeighbor)
-        print("-->",n,ratioNeighbor)
+        #print("-->",n,ratioNeighbor)
         valueWCAG=contrast.passes_AA(ratioNeighbor)
         if valueWCAG==True:
-            print("new neighbor found", n,ratioNeighbor)
+            print("a new solution has been found", n,ratioNeighbor)
             return n,valueWCAG,ratioNeighbor
         elif index+1==len(neighborhood):
             #retornar vizinho que mais se aproxima de ser true

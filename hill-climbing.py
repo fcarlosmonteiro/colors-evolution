@@ -18,21 +18,29 @@ hex_result=[]
 e executa enquanto nao encontrar uma cor.
 '''
 def test_constrat_ratio(main_color,colors):
+    #result.append(main_color)
+    #result_ratio.append(0.0)
+    print("\nBase Color:", main_color)
     main_color=utils.convert_scale(main_color)
-    print(main_color)
     for idx,c in enumerate(colors):
+       
+        print("=============Starting testing for Color "+str(idx+1)+"=============")
         current_color=c[0]
         ratio=contrast.rgb(main_color, utils.convert_scale(current_color))
+        print("aaaa",ratio)
         valueWCAG=contrast.passes_AA(ratio)
         while valueWCAG==False:
             print("Hill Climbing is starting for color "+str(idx+1)+"...")
             current_color,valueWCAG,ratioNeighbor=hill_climbing(current_color,main_color)
         else:
-            ratio=ratioNeighbor
+            try:
+                ratio=ratioNeighbor
+            except:
+                pass
             print("=============Color "+str(idx+1)+" passed the AA test=============")
             print(current_color, ratio)
             result.append(current_color)
-            result_ratio.append(ratioNeighbor)
+            result_ratio.append(ratio)
     return current_color
 
 '''processo algoritmo subida da encosta
@@ -59,15 +67,18 @@ def generate_neighborhood(current):
     neighbor2[1]=random.randint(0,255)
     neighborhood.append(neighbor2)
     
-    neighbor3=c.copy()    
+    neighbor3=c.copy()
+    neighbor3[0]=random.randint(0,255)    
+    neighbor3[1]=random.randint(0,255)
     neighbor3[2]=random.randint(0,255)
+
     neighborhood.append(neighbor3)
     
     return neighborhood
 
 
 if __name__ == '__main__':
-    path="./image-dataset/4.jpeg"
+    path="./image-dataset/1.jpeg"
     
     colors=utils.get_colors(path)
     print("Initial Colors",colors)
