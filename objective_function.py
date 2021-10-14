@@ -1,24 +1,30 @@
 import wcag_contrast_ratio as contrast
 import utils
+import ratio
 
 '''calcula o constrast ratio da vizinhança e retorna a cor que passar
 '''
 def objective_function(current_color,neighborhood, main_color):
-    for n in neighborhood:
-        ratioNeighbor=contrast.rgb(utils.convert_scale(main_color), utils.convert_scale(n))
-        #print("-->",n,ratioNeighbor)
+    ratioNeighbor=0
+    ratioNeighborList=[]
+    for index,n in enumerate(neighborhood):
+        ratioNeighbor=ratio.ratio_test(main_color,n)
+        ratioNeighborList.append(ratioNeighbor)
+        print("-->",n,ratioNeighbor)
         valueWCAG=contrast.passes_AA(ratioNeighbor)
         if valueWCAG==True:
+            print("new neighbor found", n,ratioNeighbor)
             return n,valueWCAG,ratioNeighbor
-        else:
+        elif index+1==len(neighborhood):
             #retornar vizinho que mais se aproxima de ser true
-            pass    
+            nx = find_nearest_neighbor(ratioNeighborList)
+            n = neighborhood[ratioNeighborList.index(nx)]
+            return n,valueWCAG,ratioNeighbor
 
 '''calcula o ratio mais proximo de se tornar true
 '''
-def find_nearest_neighbor(a,b):
+def find_nearest_neighbor(list):
     reference=4.5
-    a_list=[a,b]
     absolute_difference_function = lambda list_value : abs(list_value - reference)
-    closest_value = min(a_list, key=absolute_difference_function)
+    closest_value = min(list, key=absolute_difference_function)
     return closest_value

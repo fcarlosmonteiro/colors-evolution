@@ -19,9 +19,10 @@ e executa enquanto nao encontrar uma cor.
 '''
 def test_constrat_ratio(main_color,colors):
     main_color=utils.convert_scale(main_color)
+    print(main_color)
     for idx,c in enumerate(colors):
         current_color=c[0]
-        ratio=contrast.rgb(main_color, utils.convert_scale(c[0]))
+        ratio=contrast.rgb(main_color, utils.convert_scale(current_color))
         valueWCAG=contrast.passes_AA(ratio)
         while valueWCAG==False:
             print("Hill Climbing is starting for color "+str(idx+1)+"...")
@@ -29,7 +30,7 @@ def test_constrat_ratio(main_color,colors):
         else:
             ratio=ratioNeighbor
             print("=============Color "+str(idx+1)+" passed the AA test=============")
-            #print(current_color, ratio)
+            print(current_color, ratio)
             result.append(current_color)
             result_ratio.append(ratioNeighbor)
     return current_color
@@ -37,6 +38,7 @@ def test_constrat_ratio(main_color,colors):
 '''processo algoritmo subida da encosta
 '''
 def hill_climbing(current_color,main_color):
+    ratioNeighbor=0
     fit_value=[]
     neighborhood=generate_neighborhood(current_color)
     print("Current",current_color)
@@ -51,7 +53,6 @@ def generate_neighborhood(current):
     c=list(current)
     neighbor1=c.copy()
     neighbor1[0]=random.randint(0,255)
-    neighbor1[1]=random.randint(0,255)
     neighborhood.append(neighbor1)
     
     neighbor2=c.copy()    
