@@ -2,8 +2,8 @@ import wcag_contrast_ratio as contrast
 import utils
 
 
-cor1=[217, 59, 34]
-cor2=[253, 254, 243]
+cor1=[255, 255, 255]
+cor2=[85, 74, 107]
 c1=utils.convert_scale(cor1)
 print(c1)
 c2=utils.convert_scale(cor2)

@@ -18,16 +18,14 @@ hex_result=[]
 e executa enquanto nao encontrar uma cor.
 '''
 def test_constrat_ratio(main_color,colors):
-    #result.append(main_color)
-    #result_ratio.append(0.0)
+    result.append(main_color)
+    result_ratio.append(0.0)
     print("\nBase Color:", main_color)
     main_color=utils.convert_scale(main_color)
     for idx,c in enumerate(colors):
-       
         print("=============Starting testing for Color "+str(idx+1)+"=============")
         current_color=c[0]
         ratio=contrast.rgb(main_color, utils.convert_scale(current_color))
-        print("aaaa",ratio)
         valueWCAG=contrast.passes_AA(ratio)
         while valueWCAG==False:
             print("Hill Climbing is starting for color "+str(idx+1)+"...")
@@ -41,6 +39,8 @@ def test_constrat_ratio(main_color,colors):
             print(current_color, ratio)
             result.append(current_color)
             result_ratio.append(ratio)
+            try: del ratioNeighbor
+            except: pass
     return current_color
 
 '''processo algoritmo subida da encosta
@@ -78,7 +78,7 @@ def generate_neighborhood(current):
 
 
 if __name__ == '__main__':
-    path="./image-dataset/1.jpeg"
+    path="./image-dataset/4.jpeg"
     
     colors=utils.get_colors(path)
     print("Initial Colors",colors)
