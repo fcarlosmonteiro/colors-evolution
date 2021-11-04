@@ -3,6 +3,7 @@ import random
 
 from networkx.drawing.layout import rescale_layout
 import utils
+from colormap import rgb2hex
 import objective_function as of
 import wcag_contrast_ratio as contrast
 
@@ -18,10 +19,12 @@ hex_result=[]
 e executa enquanto nao encontrar uma cor.
 '''
 def test_constrat_ratio(main_color,colors):
+    hex_result.append(rgb2hex(r=main_color[0],g=main_color[1],b=main_color[2]))
     result.append(main_color)
     result_ratio.append(0.0)
     print("\nBase Color:", main_color)
     main_color=utils.convert_scale(main_color)
+    
     for idx,c in enumerate(colors):
         print("=============Starting testing for Color "+str(idx+1)+"=============")
         current_color=c[0]
@@ -37,10 +40,14 @@ def test_constrat_ratio(main_color,colors):
                 pass
             print("=============Color "+str(idx+1)+" passed the AA test=============")
             print(current_color, ratio)
+            
             result.append(current_color)
+            hex_result.append(rgb2hex(r=current_color[0],g=current_color[1],b=current_color[2]))
             result_ratio.append(ratio)
+            
             try: del ratioNeighbor
             except: pass
+    
     return current_color
 
 '''processo algoritmo subida da encosta
@@ -90,8 +97,8 @@ if __name__ == '__main__':
     print(main_color)
     test_constrat_ratio(main_color,colors)
     
-    utils.save_xls(result,result_ratio)
+    utils.save_xls(hex_result,result_ratio)
     
-    print("Results: ",result)    
+    print("Results: ",hex_result)    
     namer="results"
     utils.plot_palette(namer,result)
