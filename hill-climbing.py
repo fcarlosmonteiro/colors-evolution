@@ -85,7 +85,7 @@ def generate_neighborhood(current):
 
 
 if __name__ == '__main__':
-    path="./image-dataset/4.jpeg"
+    path="./image-dataset/2.jpeg"
     
     colors=utils.get_colors(path)
     print("Initial Colors",colors)
